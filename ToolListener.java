@@ -16,6 +16,15 @@ public class ToolListener extends MouseAdapter {
             case "circle":
                 DrawCircle.init();
                 break;
+            case "rectangle":
+                DrawRectangle.init();
+                break;
+            case "polygon":
+                DrawPolygon.init();
+                break;
+            case "triangle":
+                DrawTriangle.init();
+                break;
             default:
                 break;
             }

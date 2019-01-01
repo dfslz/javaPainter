@@ -11,6 +11,15 @@ public class CanvasListener extends MouseAdapter {
             case "circle":
                 DrawCircle.drawCircle(me);
                 break;
+            case "rectangle":
+                DrawRectangle.drawRectangle(me);
+                break;
+            case "polygon":
+                DrawPolygon.drawPolygon(me);
+                break;
+            case "triangle":
+                DrawTriangle.drawTriangle(me);
+                break;
             default:
                 System.out.println("error: unknown tool");
             }
@@ -27,6 +36,15 @@ public class CanvasListener extends MouseAdapter {
             break;
         case "circle":
             DrawCircle.preview(me);
+            break;
+        case "rectangle":
+            DrawRectangle.preview(me);
+            break;
+        case "polygon":
+            DrawPolygon.preview(me);
+            break;
+        case "triangle":
+            DrawTriangle.preview(me);
             break;
         }
     }

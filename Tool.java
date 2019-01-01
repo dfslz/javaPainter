@@ -4,21 +4,21 @@ import java.io.File;
 import javax.swing.*;
 
 public class Tool extends JToolBar {
-    private static final String IMG = "img";
-
     private static final long serialVersionUID = 1L;
 
     JToggleButton select;
     JToggleButton rectangle;
     JToggleButton line;
     JToggleButton circle;
+    JToggleButton polygon;
+    JToggleButton triangle;
 
     public Tool() {
         this.setFloatable(false);//不可移动
         this.setOrientation(JToolBar.VERTICAL);//竖直排列
 
         //选择工具
-        String path = IMG + File.separator;
+        String path = "img" + File.separator;
         select = getIconButton(30, path+"select.jpeg", "select");
         select.addMouseListener(new ToolListener());
         this.add(select);
@@ -39,6 +39,16 @@ public class Tool extends JToolBar {
         circle = getIconButton(30, path+"circle.png", "circle");
         circle.addMouseListener(new ToolListener());
         this.add(circle);
+
+        //多边形工具
+        polygon = getIconButton(30, path+"polygon.jpeg", "polygon");
+        polygon.addMouseListener(new ToolListener());
+        this.add(polygon);
+
+        //三角形工具
+        triangle = getIconButton(30, path+"triangle.jpg", "triangle");
+        triangle.addMouseListener(new ToolListener());
+        this.add(triangle);
     }
 
     public JToggleButton getIconButton(int size, String file, String note) {

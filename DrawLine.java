@@ -32,9 +32,9 @@ public class DrawLine {
 
     public static void preview(MouseEvent me) {
         if(!twice) return;
-        Graphics2D pg = (Graphics2D)Common.painterCanvas.getGraphics();
-        pg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        pg.drawImage(Common.buffer, 0, 0, Common.painterCanvas);
-        pg.drawLine(line.sx, line.sy, me.getX(), me.getY());
+        Graphics2D g2d = (Graphics2D)Common.painterCanvas.getGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.drawImage(Common.buffer, 0, 0, Common.painterCanvas);
+        g2d.drawLine(line.sx, line.sy, me.getX(), me.getY());
     }
 }

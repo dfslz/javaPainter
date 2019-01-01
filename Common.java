@@ -23,7 +23,11 @@ public class Common {
     }
 
     public static void rendering() {//渲染缓冲区图像
-        Common.initBuffer();
+        Dimension d = Common.painterCanvas.getSize();
+        Graphics gg = Common.buffer.getGraphics();
+        gg.setColor(Color.WHITE);
+        gg.fillRect(0, 0, d.width, d.height);//设置缓冲区背景色,即清屏
+
         for(int i = 0; i < Common.renderQueue.size(); ++i) {//循环渲染每一个对象
             MyGraphics mg = renderQueue.get(i);
 
@@ -31,9 +35,15 @@ public class Common {
                 DrawLine.drawLine((MyLine)mg);
             } else if(mg instanceof MyCircle) {
                 DrawCircle.drawCircle((MyCircle)mg);
+            } else if(mg instanceof MyRectangle) {
+                //DrawRectangle.drawRectangle((MyRectangle)mg);
+                DrawPolygon.drawPolygon((MyPolygon)mg);
+            } else if(mg instanceof MyPolygon) {
+                DrawPolygon.drawPolygon((MyPolygon)mg);
+            } else if(mg instanceof MyTriangle) {
+                DrawPolygon.drawPolygon((MyPolygon)mg);
             }
         }
-        //Common.painterCanvas.getGraphics().drawImage(buffer, 0, 0, Common.painterCanvas);//画图
     }
 
     public static void save() {//序列化文件保存
