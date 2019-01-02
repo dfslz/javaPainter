@@ -3,8 +3,6 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-//import PainterCanvas.*;
-
 public class JavaPainter {
     public static void main(String[] args) {
         Common.painter = new JFrame("JavaPainter");

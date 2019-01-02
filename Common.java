@@ -15,6 +15,7 @@ public class Common {
     public static Image buffer;//缓冲区
     public static JToggleButton tool;//当前选中的工具
     public static RenderQueue renderQueue = new RenderQueue();//渲染队列
+    public static RenderQueue history = new RenderQueue();
     public static File currentFile;//当前编辑的文件
 
     public static void setTool(JToggleButton _tool) {//设置工具
