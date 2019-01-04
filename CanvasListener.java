@@ -20,8 +20,11 @@ public class CanvasListener extends MouseAdapter {
             case "triangle":
                 DrawTriangle.drawTriangle(me);
                 break;
+            case "text":
+                DrawText.dialog(me);
+                break;
             default:
-                System.out.println("error: unknown tool");
+                break;
             }
         } catch (NullPointerException npe) {
             System.out.println("toolbar is not initial");
@@ -46,6 +49,43 @@ public class CanvasListener extends MouseAdapter {
         case "triangle":
             DrawTriangle.preview(me);
             break;
+        }
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent me) {
+        switch (Common.tool.getName()) {
+        case "pen":
+            DrawTrace.draw(me);
+            break;
+        default:
+            break;
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent me) {
+        switch (Common.tool.getName()) {
+        case "pen":
+            DrawTrace.init();
+            break;
+        default:
+            break;
+        }
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent me) {
+        switch(Common.tool.getName()) {
+        case "pen":
+            try {
+                Brush brush = (Brush) Common.renderQueue.top();
+                if(brush.trace.size() < 2) {
+                    Common.renderQueue.pop();
+                }
+            } catch(Exception e) {
+                //do nothing
+            }
         }
     }
 }

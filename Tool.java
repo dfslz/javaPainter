@@ -12,6 +12,8 @@ public class Tool extends JToolBar {
     JToggleButton circle;
     JToggleButton polygon;
     JToggleButton triangle;
+    JToggleButton pen;
+    JToggleButton text;
 
     public Tool() {
         this.setFloatable(false);//不可移动
@@ -49,6 +51,16 @@ public class Tool extends JToolBar {
         triangle = getIconButton(30, path+"triangle.jpg", "triangle");
         triangle.addMouseListener(new ToolListener());
         this.add(triangle);
+
+        //画笔工具
+        pen = getIconButton(30, path+"pen.png", "pen");
+        pen.addMouseListener(new ToolListener());
+        this.add(pen);
+
+        //文本工具
+        text = getIconButton(30, path+"text.jpeg", "text");
+        text.addMouseListener(new ToolListener());
+        this.add(text);
     }
 
     public JToggleButton getIconButton(int size, String file, String note) {

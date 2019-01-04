@@ -37,12 +37,15 @@ public class Common {
             } else if(mg instanceof MyCircle) {
                 DrawCircle.drawCircle((MyCircle)mg);
             } else if(mg instanceof MyRectangle) {
-                //DrawRectangle.drawRectangle((MyRectangle)mg);
                 DrawPolygon.drawPolygon((MyPolygon)mg);
             } else if(mg instanceof MyPolygon) {
                 DrawPolygon.drawPolygon((MyPolygon)mg);
             } else if(mg instanceof MyTriangle) {
                 DrawPolygon.drawPolygon((MyPolygon)mg);
+            } else if(mg instanceof Brush) {
+                DrawTrace.drawTrace((Brush)mg);
+            } else if(mg instanceof Text) {
+                DrawText.draw((Text)mg);
             }
         }
     }
