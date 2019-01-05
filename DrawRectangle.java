@@ -23,6 +23,7 @@ public class DrawRectangle {
             rectangle.y.add(me.getY());
 
             Common.renderQueue.push(rectangle);
+            Common.showProperty(rectangle);
             Common.painterCanvas.repaint();
             twice = false;
         } else {

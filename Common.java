@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +11,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.*;
+
+import com.sun.xml.internal.ws.handler.HandlerException;
 
 public class Common {
     public static JFrame painter;//画板窗口
@@ -88,5 +94,95 @@ public class Common {
         Graphics gg = Common.buffer.getGraphics();
         gg.setColor(Color.WHITE);
         gg.fillRect(0, 0, d.width, d.height);//设置缓冲区背景色
+    }
+
+    private static Font font;
+    private static String string;
+    private static int size;
+    private static Color color;
+    private static boolean isFilled;
+    public static void showProperty(MyGraphics mg) {
+        Dialog input = new Dialog(Common.painter);
+        input.setModal(true);
+        input.setSize(300, 120);
+        input.setLocation(500, 300);
+        input.setLayout(new BorderLayout());
+
+        JTextField jtf = new JTextField("在这里填字符串");
+        input.add(jtf, BorderLayout.NORTH);
+
+        JPanel cjp = new JPanel(new BorderLayout());
+        cjp.add(new JLabel("Size: "), BorderLayout.WEST);
+        JTextField tsize = new JTextField("18");
+        cjp.add(tsize, BorderLayout.CENTER);
+        input.add(cjp, BorderLayout.CENTER);
+
+        JPanel jp = new JPanel(new BorderLayout());
+        
+        JButton ok = new JButton("OK");
+        ok.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(e.getActionCommand().equals("OK")) {
+                    string = jtf.getText();
+                    size = Integer.parseInt(tsize.getText());
+                    font = new Font("宋体", Font.PLAIN, size);
+                    input.setVisible(false);
+                }
+            }
+        });
+
+        JButton scolor = new JButton("color");
+        scolor.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    color = JColorChooser.showDialog(Common.painter, "color", Color.BLACK);
+                } catch(HandlerException he) {
+                }
+            }
+        });
+
+        jp.add(ok, BorderLayout.WEST);
+        jp.add(scolor, BorderLayout.CENTER);
+        jp.add(new JLabel("注意：设置只对拥有该属性的对象有效"), BorderLayout.SOUTH);
+        JToggleButton jtb = new JToggleButton("填充");
+        isFilled = false;
+        jtb.setSelected(false);
+        jtb.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                JToggleButton tb = (JToggleButton)me.getSource();
+                tb.setSelected(tb.isSelected());
+                isFilled = tb.isSelected();
+            }
+        });
+        input.add(jtb, BorderLayout.EAST);
+        input.add(jp, BorderLayout.SOUTH);
+        input.setVisible(true);
+
+        if(mg instanceof MyLine) {
+            ((MyLine)mg).color = color;
+        } else if(mg instanceof MyCircle) {
+            ((MyCircle)mg).color = color;
+            ((MyCircle)mg).isFilled = isFilled;
+        } else if(mg instanceof MyRectangle) {
+            ((MyRectangle)mg).color = color;
+            ((MyRectangle)mg).isFilled = isFilled;
+        } else if(mg instanceof MyPolygon) {
+            ((MyPolygon)mg).color = color;
+            ((MyPolygon)mg).isFilled = isFilled;
+        } else if(mg instanceof MyTriangle) {
+            ((MyTriangle)mg).color = color;
+            ((MyTriangle)mg).isFilled = isFilled;
+        } else if(mg instanceof Brush) {
+            ((Brush)mg).color = color;
+        } else if(mg instanceof Text) {
+            ((Text)mg).color = color;
+            ((Text)mg).text = string;
+            ((Text)mg).font = font;
+        }
+
+        Common.painterCanvas.repaint();
     }
 }

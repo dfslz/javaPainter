@@ -20,6 +20,7 @@ public class DrawLine {
             line.ex = me.getX();
             line.ey = me.getY();
             Common.renderQueue.push(line);
+            Common.showProperty(line);
             Common.painterCanvas.repaint();
             twice = false;
         } else {

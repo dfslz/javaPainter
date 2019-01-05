@@ -16,6 +16,7 @@ public class DrawTriangle {
             triangle.x.add(me.getX());
             triangle.y.add(me.getY());
             Common.renderQueue.push(triangle);
+            Common.showProperty(triangle);
             Common.painterCanvas.repaint();
             count = 0;
         } else {

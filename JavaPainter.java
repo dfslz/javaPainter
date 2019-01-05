@@ -22,7 +22,7 @@ public class JavaPainter {
         Common.toolbar.add(new Tool(), BorderLayout.PAGE_START);
         Common.painter.add(Common.toolbar, BorderLayout.WEST);
 
-        //右侧画布
+        //中间画布
         Common.painterCanvas = new PainterCanvas();
         Common.painterCanvas.setBackground(Color.WHITE);
         Common.painter.add(Common.painterCanvas, BorderLayout.CENTER);

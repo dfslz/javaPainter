@@ -14,8 +14,13 @@ public class DrawCircle {
 
     public static void drawCircle(MyCircle mc) {
         Graphics2D g2d = (Graphics2D) Common.buffer.getGraphics();
+        g2d.setColor(mc.color);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g2d.drawOval(mc.center.width, mc.center.height, mc.radius, mc.radius);
+        if(mc.isFilled) {
+            g2d.fillOval(mc.center.width, mc.center.height, mc.radius, mc.radius);
+        } else {
+            g2d.drawOval(mc.center.width, mc.center.height, mc.radius, mc.radius);
+        }
     }
 
     public static void drawCircle(MouseEvent me) {
@@ -27,6 +32,7 @@ public class DrawCircle {
             Common.renderQueue.push(circle);
             Common.painterCanvas.repaint();;
             twice = false;
+            Common.showProperty(circle);
         } else {
             circle = new MyCircle();
             circle.center = new Dimension(me.getX(), me.getY());

@@ -13,6 +13,7 @@ public class DrawPolygon {
 
     public static void drawPolygon(MyPolygon mp) {
         Graphics2D g2d = (Graphics2D) Common.buffer.getGraphics();
+        g2d.setColor(mp.color);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         x = new int[mp.x.size()];
         y = new int[mp.y.size()];
@@ -20,7 +21,11 @@ public class DrawPolygon {
             x[i] = mp.x.get(i);
             y[i] = mp.y.get(i);
         }
-        g2d.drawPolygon(x, y, mp.x.size());
+        if(!mp.isFilled) {
+            g2d.drawPolygon(x, y, mp.x.size());
+        } else {
+            g2d.fillPolygon(x, y, mp.x.size());
+        }
     }
 
     public static void drawPolygon(MouseEvent me) {
@@ -28,6 +33,7 @@ public class DrawPolygon {
             polygon.x.add(me.getX());
             polygon.y.add(me.getY());
             Common.renderQueue.push(polygon);
+            Common.showProperty(polygon);
             Common.painterCanvas.repaint();
             count = 0;
         } else if (me.getButton() == MouseEvent.BUTTON1) {// 左键

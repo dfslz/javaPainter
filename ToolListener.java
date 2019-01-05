@@ -25,6 +25,9 @@ public class ToolListener extends MouseAdapter {
             case "triangle":
                 DrawTriangle.init();
                 break;
+            case "select":
+                Pick.init();
+                break;
             default:
                 break;
             }

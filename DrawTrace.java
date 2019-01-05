@@ -17,6 +17,7 @@ public class DrawTrace {
 
     public static void drawTrace(Brush brush) {
         Graphics2D g2d = (Graphics2D) Common.buffer.getGraphics();
+        g2d.setColor(brush.color);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         for (int i = 1; i < brush.trace.size(); ++i) {

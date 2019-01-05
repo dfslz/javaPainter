@@ -23,6 +23,9 @@ public class CanvasListener extends MouseAdapter {
             case "text":
                 DrawText.dialog(me);
                 break;
+            case "select":
+                Pick.modify(me);
+                break;
             default:
                 break;
             }
@@ -58,6 +61,9 @@ public class CanvasListener extends MouseAdapter {
         case "pen":
             DrawTrace.draw(me);
             break;
+        case "select":
+            Pick.drag(me);
+            break;
         default:
             break;
         }
@@ -68,6 +74,9 @@ public class CanvasListener extends MouseAdapter {
         switch (Common.tool.getName()) {
         case "pen":
             DrawTrace.init();
+            break;
+        case "select":
+            Pick.select(me);
             break;
         default:
             break;
@@ -82,10 +91,18 @@ public class CanvasListener extends MouseAdapter {
                 Brush brush = (Brush) Common.renderQueue.top();
                 if(brush.trace.size() < 2) {
                     Common.renderQueue.pop();
+                } else {
+                    Common.showProperty(Common.renderQueue.top());
                 }
             } catch(Exception e) {
                 //do nothing
             }
+            break;
+        case "select":
+            Pick.init();
+            break;
+        default:
+            break;
         }
     }
 }
