@@ -17,8 +17,19 @@ public class Brush extends MyGraphics implements Serializable{
     }
 
     public boolean selected(int x, int y) {
-        return true;//画笔不可选中
+        for(int i = 0; i < trace.size(); ++i) {
+            int w = trace.get(i).width;
+            int h = trace.get(i).height;
+            w = (x-w)*(x-w)+(y-h)*(y-h);
+            if(w < 200) return true;
+        }
+        return false;
     }
 
-    public void add(int x, int y) {}
+    public void add(int x, int y) {
+        for(int i = 0; i < trace.size(); ++i) {
+            trace.get(i).width += x;
+            trace.get(i).height += y;
+        }
+    }
 }

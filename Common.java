@@ -147,7 +147,6 @@ public class Common {
         jp.add(scolor, BorderLayout.CENTER);
         jp.add(new JLabel("注意：设置只对拥有该属性的对象有效"), BorderLayout.SOUTH);
         JToggleButton jtb = new JToggleButton("填充");
-        isFilled = false;
         jtb.setSelected(false);
         jtb.addMouseListener(new MouseAdapter() {
             @Override
@@ -159,25 +158,54 @@ public class Common {
         });
         input.add(jtb, BorderLayout.EAST);
         input.add(jp, BorderLayout.SOUTH);
-        input.setVisible(true);
+        //input.setVisible(true);
 
-        if(mg instanceof MyLine) {
+        if(mg instanceof MyLine) {//直线
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            input.setVisible(true);
             ((MyLine)mg).color = color;
-        } else if(mg instanceof MyCircle) {
+        } else if(mg instanceof MyCircle) {//圆形
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            jtb.setSelected(((MyCircle)mg).isFilled);
+            isFilled = ((MyCircle)mg).isFilled;
+            input.setVisible(true);
             ((MyCircle)mg).color = color;
             ((MyCircle)mg).isFilled = isFilled;
-        } else if(mg instanceof MyRectangle) {
+        } else if(mg instanceof MyRectangle) {//正方形
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            jtb.setSelected(((MyRectangle)mg).isFilled);
+            isFilled = ((MyRectangle)mg).isFilled;
+            input.setVisible(true);
             ((MyRectangle)mg).color = color;
             ((MyRectangle)mg).isFilled = isFilled;
-        } else if(mg instanceof MyPolygon) {
+        } else if(mg instanceof MyPolygon) {//多边形
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            jtb.setSelected(((MyPolygon)mg).isFilled);
+            isFilled = ((MyPolygon)mg).isFilled;
+            input.setVisible(true);
             ((MyPolygon)mg).color = color;
             ((MyPolygon)mg).isFilled = isFilled;
-        } else if(mg instanceof MyTriangle) {
+        } else if(mg instanceof MyTriangle) {//三角形
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            jtb.setSelected(((MyTriangle)mg).isFilled);
+            isFilled = ((MyTriangle)mg).isFilled;
+            input.setVisible(true);
             ((MyTriangle)mg).color = color;
             ((MyTriangle)mg).isFilled = isFilled;
-        } else if(mg instanceof Brush) {
+        } else if(mg instanceof Brush) {//笔刷
+            jtf.setEditable(false);
+            tsize.setEditable(false);
+            input.setVisible(true);
             ((Brush)mg).color = color;
-        } else if(mg instanceof Text) {
+        } else if(mg instanceof Text) {//文本
+            jtf.setText(((Text)mg).text);
+            tsize.setText(((Text)mg).font.getSize()+"");//强行转换为String
+            input.setVisible(true);
             ((Text)mg).color = color;
             ((Text)mg).text = string;
             ((Text)mg).font = font;
